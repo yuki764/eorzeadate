@@ -1,0 +1,71 @@
+#!/bin/sh
+epoch=$(date +%s "$@")
+if [ $? -ne 0 ]; then
+	exit 1;
+fi
+
+eomoon=$(expr \( $epoch / \( 175 \* 24 \* 32 \) \) % 12)
+eodate=$(expr \( $epoch / \( 175 \* 24 \) \) % 32 + 1)
+eohour=$(expr \( $epoch / 175 \) % 24)
+eominu=$(expr \( $epoch \* 60 / 175 \) % 60)
+
+eotime=$(printf "%02d:%02d" $eohour $eominu)
+
+if [ "$LANG" = "ja_JP.UTF-8" ]; then
+	case "$(expr $eodate % 8)" in
+		"0" ) eoday="霊極日";;
+		"1" ) eoday="風属日";;
+		"2" ) eoday="雷属日";;
+		"3" ) eoday="火属日";;
+		"4" ) eoday="土属日";;
+		"5" ) eoday="氷属日";;
+		"6" ) eoday="水属日";;
+		"7" ) eoday="霊極日";;
+	esac
+
+	if [ $(expr $eomoon % 2) -eq 0 ]; then
+		astral_or_umbral="星"
+	else
+		astral_or_umbral="霊"
+	fi
+		echo "${astral_or_umbral}$(expr ${eomoon} / 2 + 1)月 ${eodate}日 ${eoday} ${eotime}"
+else
+	case "$(expr $eodate % 8)" in
+		"0" ) eoday="Darksday";;
+		"1" ) eoday="Windsday";;
+		"2" ) eoday="Lightningday";;
+		"3" ) eoday="Firesday";;
+		"4" ) eoday="Earthsday";;
+		"5" ) eoday="Iceday";;
+		"6" ) eoday="Watersday";;
+		"7" ) eoday="Lightsday";;
+	esac
+
+	if [ $eodate -eq 1 -o $eodate -eq 21 -o $eodate -eq 31 ]; then
+		eodate_ord="${eodate}st"
+	elif [ $eodate -eq 2 -o $eodate -eq 22 -o $eodate -eq 32 ]; then
+		eodate_ord="${eodate}nd"
+	elif [ $eodate -eq 3 -o $eodate -eq 23 ]; then
+		eodate_ord="${eodate}rd"
+	else
+		eodate_ord="${eodate}th"
+	fi
+
+	eomoon_div_by_2=$(expr ${eomoon} / 2 + 1)
+	if [ $eomoon_div_by_2 -eq 1 ]; then
+		eomoon_div_by_2_ord="${eomoon_div_by_2}st"
+	elif [ $eomoon_div_by_2 -eq 2 ]; then
+		eomoon_div_by_2_ord="${eomoon_div_by_2}nd"
+	elif [ $eomoon_div_by_2 -eq 2 ]; then
+		eomoon_div_by_2_ord="${eomoon_div_by_2}rd"
+	else
+		eomoon_div_by_2_ord="${eomoon_div_by_2}th"
+	fi
+
+	if [ $(expr $eomoon % 2) -eq 0 ]; then
+		astral_or_umbral="Astral"
+	else
+		astral_or_umbral="Umbral"
+	fi
+		echo "${eoday}, ${eodate_ord} Sun of the ${eomoon_div_by_2_ord} ${astral_or_umbral} Moon ${eotime}"
+fi
