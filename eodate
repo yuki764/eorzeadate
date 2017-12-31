@@ -1,4 +1,5 @@
 #!/bin/sh
+
 epoch=$(date +%s "$@")
 if [ $? -ne 0 ]; then
 	exit 1;
@@ -28,7 +29,7 @@ if [ "$LANG" = "ja_JP.UTF-8" ]; then
 	else
 		astral_or_umbral="霊"
 	fi
-		echo "${astral_or_umbral}$(expr ${eomoon} / 2 + 1)月 ${eodate}日 ${eoday} ${eotime}"
+	echo "${astral_or_umbral}$(expr ${eomoon} / 2 + 1)月 ${eodate}日 ${eoday} ${eotime}"
 else
 	case "$(expr $eodate % 8)" in
 		"0" ) eoday="Darksday";;
@@ -67,5 +68,5 @@ else
 	else
 		astral_or_umbral="Umbral"
 	fi
-		echo "${eoday}, ${eodate_ord} Sun of the ${eomoon_div_by_2_ord} ${astral_or_umbral} Moon ${eotime}"
+	echo "${eoday}, ${eodate_ord} Sun of the ${eomoon_div_by_2_ord} ${astral_or_umbral} Moon ${eotime}"
 fi
