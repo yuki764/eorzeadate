@@ -1,6 +1,6 @@
 # eodate - Eorzea date command
 ## Description
-Translate Earth time to Eorzea time.
+Translate Earth time to Eorzea (a world of Final Fantasy XIV) time.
 Support for English and Japanese format.
 
 ## How to use
