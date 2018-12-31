@@ -6,7 +6,7 @@ Support for English and Japanese format.
 ## How to use
 Using with no option, translate current time to Eorzea time.
 You can use the same options of `date` command.
-But you must not specify the format.
+But you must **NOT** specify the format option (`+FORMAT`).
 
 ### First example
 ```bash
