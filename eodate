@@ -21,7 +21,7 @@ if [ "$LANG" = "ja_JP.UTF-8" ]; then
 		"4" ) eoday="土属日";;
 		"5" ) eoday="氷属日";;
 		"6" ) eoday="水属日";;
-		"7" ) eoday="霊極日";;
+		"7" ) eoday="星極日";;
 	esac
 
 	if [ $(expr $eomoon % 2) -eq 0 ]; then
@@ -32,14 +32,14 @@ if [ "$LANG" = "ja_JP.UTF-8" ]; then
 	echo "${astral_or_umbral}$(expr ${eomoon} / 2 + 1)月 ${eodate}日 ${eoday} ${eotime}"
 else
 	case "$(expr $eodate % 8)" in
-		"0" ) eoday="Darksday";;
+		"0" ) eoday="Lightsday";;
 		"1" ) eoday="Windsday";;
 		"2" ) eoday="Lightningday";;
 		"3" ) eoday="Firesday";;
 		"4" ) eoday="Earthsday";;
 		"5" ) eoday="Iceday";;
 		"6" ) eoday="Watersday";;
-		"7" ) eoday="Lightsday";;
+		"7" ) eoday="Darksday";;
 	esac
 
 	if [ $eodate -eq 1 -o $eodate -eq 21 -o $eodate -eq 31 ]; then
